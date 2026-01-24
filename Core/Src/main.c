@@ -110,54 +110,54 @@ int main(void)
   TEST_OUT_HIGH;
 #ifdef PLUS
 
-  //����96λΨһUID��ȡADC��ϲ���
+  //根据96位唯一UID获取ADC拟合参数
   // ADC_Curve_Fitting();
   
 
-  //��Դ��·������ʼ��
+  //电源环路参数初始化
   Power_Loop_Parameter_Init();
 
-  //������·��ʼ��
+  //保护环路初始化
   Protection_Init();
 
-  //�˷���У׼
+  //运放自校准
   HAL_OPAMP_SelfCalibrate(&hopamp1);
   HAL_Delay(1);
 
-  HAL_IWDG_Refresh(&hiwdg);//��Ϊ�˷���У׼��Ҫ30ms��Ϊ�˱��⿴�Ź���λ��������Ҫ����ι��
+  HAL_IWDG_Refresh(&hiwdg);//因为运放自校准需要30ms，为了避免看门狗复位，所以需要进行喂狗
   HAL_OPAMP_SelfCalibrate(&hopamp2);
   HAL_Delay(1);
 
-  HAL_IWDG_Refresh(&hiwdg);//��Ϊ�˷���У׼��Ҫ30ms��Ϊ�˱��⿴�Ź���λ��������Ҫ����ι��
+  HAL_IWDG_Refresh(&hiwdg);//因为运放自校准需要30ms，为了避免看门狗复位，所以需要进行喂狗
   HAL_OPAMP_SelfCalibrate(&hopamp3);
   HAL_Delay(1);
 
-  HAL_IWDG_Refresh(&hiwdg);//��Ϊ�˷���У׼��Ҫ30ms��Ϊ�˱��⿴�Ź���λ��������Ҫ����ι��
+  HAL_IWDG_Refresh(&hiwdg);//因为运放自校准需要30ms，为了避免看门狗复位，所以需要进行喂狗
   
-  //�����˷�
+  //启动运放
   HAL_OPAMP_Start(&hopamp1);
   HAL_OPAMP_Start(&hopamp2);
   HAL_OPAMP_Start(&hopamp3);
 
-  //ADC��У׼
+  //ADC自校准
   HAL_ADCEx_Calibration_Start(&hadc1,ADC_SINGLE_ENDED);
   HAL_Delay(1);
   HAL_ADCEx_Calibration_Start(&hadc2,ADC_SINGLE_ENDED);
   HAL_Delay(1);
   HAL_ADCEx_InjectedStart_IT(&hadc1);
   HAL_ADCEx_InjectedStart(&hadc2);
-  //FDCAN��������ʼ��
+  //FDCAN过滤器初始化
   FDCAN_Filter_Init();
 
-  //����FDCAN
+  //开启FDCAN
   HAL_FDCAN_Start(&hfdcan1);
 
-  //����PWM�Ķ�ʱ������
+  //半桥PWM的定时器启动
   HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2);
   HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_2);
-  //����FDCAN�ж�
+  //开启FDCAN中断
   HAL_FDCAN_ActivateNotification(&hfdcan1,FDCAN_IT_RX_FIFO0_NEW_MESSAGE,0);
-  //ADC�����Ķ�ʱ��ͨ���������������ʱ��ͨ��ʱ��ADC���Ὺʼ������DMA�жϿ�ʼ��Ч��Ϊ�˱�֤�жϲ����ϳ�ʼ���������������
+  //ADC触发的定时器通道，当开启这个定时器通道时，ADC将会开始触发，DMA中断开始生效，为了保证中断不会打断初始化，必须最后开启。
   HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
 
 

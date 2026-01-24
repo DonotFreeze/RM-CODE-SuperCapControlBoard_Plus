@@ -6,7 +6,7 @@ packDir: null
 srcDirs:
   - Core
   - Drivers
-  - ../../Lib/SuperCapCtrl
+  - ../../Lib/RM-SuperCapCtrlLib
 virtualFolder:
   name: <virtual_root>
   files:
