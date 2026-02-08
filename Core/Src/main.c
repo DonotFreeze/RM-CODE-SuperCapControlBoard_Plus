@@ -110,15 +110,8 @@ int main(void)
   TEST_OUT_HIGH;
 #ifdef PLUS
 
-  //根据96位唯一UID获取ADC拟合参数
-  // ADC_Curve_Fitting();
-  
-
   //电源环路参数初始化
   Power_Loop_Parameter_Init();
-
-  //保护环路初始化
-  Protection_Init();
 
   //运放自校准
   HAL_OPAMP_SelfCalibrate(&hopamp1);
