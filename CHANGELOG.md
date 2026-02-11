@@ -1,18 +1,25 @@
 # 更新日志
 
+## [1.0.2607] - 2026-02-11
+
+### 撤销
+
+- 撤销在main.h中删除的PID_v1.h头文件包含
+- 撤销在main.c中删除的ADC_Curve_Fitting()函数与Protection_Init()函数调用，以兼容V1.2.2529-beta及之前的库。
+
 ## [1.0.2606] - 2026-02-08
 
 ### 变更
 
-* 将所有文件改为UTF-8编码格式
-* 把Protection_Init()函数和ADC_Curve_Fitting()函数放到Power_Loop_Parameter_Init()中进行初始化
+- 将所有文件改为UTF-8编码格式
+- 把Protection_Init()函数和ADC_Curve_Fitting()函数放到Power_Loop_Parameter_Init()中进行初始化
 
 ## [1.0.2519] - 2025-5-6
 
 ### 修复
 
-* 上电的时候初始化太久可能会卡看门狗一直复位。
+- 上电的时候初始化太久可能会卡看门狗一直复位。
 
 ## [1.0.2518] - 2025-5-1
 
-* 工程创建
+- 工程创建
