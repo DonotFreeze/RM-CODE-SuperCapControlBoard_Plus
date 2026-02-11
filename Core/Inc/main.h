@@ -33,6 +33,7 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 
 #include "SuperCapCtrl.h"
+#include "PID_v1.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

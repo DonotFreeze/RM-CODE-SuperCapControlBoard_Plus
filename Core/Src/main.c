@@ -113,6 +113,12 @@ int main(void)
   //电源环路参数初始化
   Power_Loop_Parameter_Init();
 
+  // 根据96位UID获取对应的ADC校准参数
+  ADC_Curve_Fitting();
+
+  // 环路保护参数初始化
+  Protection_Init();
+
   //运放自校准
   HAL_OPAMP_SelfCalibrate(&hopamp1);
   HAL_Delay(1);
